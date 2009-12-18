@@ -1,3 +1,2 @@
-- give meaningful errors
 - option for trowing errors if input hash contains keys not found in the
   schema hash.
