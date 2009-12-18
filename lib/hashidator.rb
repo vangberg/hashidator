@@ -16,25 +16,27 @@ class Hashidator
     schema.each { |key, validator|
       value = input[key]
       
-      results << case validator
-      when Range;
-        validator.include? value
-      when Array;
-        if validator[0].is_a? Symbol
-          value.respond_to? validator[0]
-        else
-          value.all? {|x| x.is_a? validator[0]}
-        end
-      when Symbol;
-        value.respond_to? validator
-      when Hash;
-        Hashidator.validate(validator, value)
-      when Class, Module;
-        value.is_a? validator
-      end
+      results << validate_value(validator, value)
     }
 
     results.all?
+  end
+
+  private
+
+  def validate_value(validator, value)
+    case validator
+    when Range
+      validator.include? value
+    when Array
+      value.all? {|x| validate_value(validator[0], x) }
+    when Symbol
+      value.respond_to? validator
+    when Hash
+      Hashidator.validate(validator, value)
+    when Class, Module
+      value.is_a? validator
+    end
   end
 end
 

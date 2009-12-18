@@ -71,6 +71,13 @@ class TestHashidator < Test::Unit::TestCase
     )
   end
 
+  def test_validate_array_members_range
+    assert_true h(
+      {:names => [(1..9)]},
+      {:names => [1, 9]}
+    )
+  end
+
   def test_validate_nested
     schema = {:name => {:first => String, :last => String}}
     assert_true h(schema, {:name => {:first => "Mike", :last => "Damone"}})
@@ -79,5 +86,19 @@ class TestHashidator < Test::Unit::TestCase
   def test_invalidate_nested
     schema = {:name => {:first => String, :last => String}}
     assert_false h(schema, {:name => {:first => "Mike", :last => 1234}})
+  end
+
+  def test_validate_deep_nested
+    assert_true h(
+      {:people => [{ :name => :to_s, :age => (18..40)}]},
+      {:people => [{ :name => "Ann", :age => 19 }, { :name => "Bob", :age => 23 }]}
+    )
+  end
+
+  def test_invalidate_deep_nested
+    assert_false h(
+      {:people => [{ :name => :to_s, :age => (18..40)}]},
+      {:people => [{ :name => "Ann", :age => 15 }, { :name => "Bob", :age => 23 }]}
+    )
   end
 end
