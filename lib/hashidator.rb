@@ -1,16 +1,16 @@
 class Hashidator
   def self.validate(schema, input)
-    hd = new(schema, input)
-    hd.validate
+    hd = new(schema)
+    hd.validate(input)
   end
 
-  attr_accessor :schema, :input, :errors
+  attr_accessor :schema, :errors
 
-  def initialize(schema, input)
-    @schema, @input = schema, input
+  def initialize(schema)
+    @schema = schema
   end
 
-  def validate
+  def validate(input)
     results = []
 
     schema.each { |key, validator|
