@@ -11,26 +11,30 @@ class Hashidator
   attr_accessor :schema, :input
 
   def validate
-    result = true
+    results = []
 
     schema.each { |key, validator|
       value = input[key]
       
-      case validator
+      results << case validator
       when Range:
-        result = false  unless validator.include? input[key]
+        validator.include? input[key]
       when Array:
-        result = false  unless value.all? {|x| x.is_a? validator[0]}
-      when Symbol:
-        result = false  unless value.respond_to? validator
-      when Class, Module:
-        if !value.is_a? validator
-          result = false
+        if validator[0].is_a? Symbol
+          value.respond_to? validator[0]
+        else
+          value.all? {|x| x.is_a? validator[0]}
         end
+      when Symbol:
+        value.respond_to? validator
+      when Hash:
+        Hashidator.validate(validator, value)
+      when Class, Module:
+        value.is_a? validator
       end
     }
 
-    result
+    results.all?
   end
 end
 

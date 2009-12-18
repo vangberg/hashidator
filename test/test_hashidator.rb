@@ -56,4 +56,28 @@ class TestHashidator < Test::Unit::TestCase
   def test_invalidate_respond_to
     assert_false h({:name => :non_existing_method}, {:name => "Harry"})
   end
+
+  def test_validate_array_members_respond_to
+    assert_true h(
+      {:names => [:to_s]},
+      {:names => ["Harry", "Damone"]}
+    )
+  end
+
+  def test_invalidate_array_members_respond_to
+    assert_false h(
+      {:name => [:non_existing_method]},
+      {:name => ["Harry", "Damone"]}
+    )
+  end
+
+  def test_validate_nested
+    schema = {:name => {:first => String, :last => String}}
+    assert_true h(schema, {:name => {:first => "Mike", :last => "Damone"}})
+  end
+
+  def test_invalidate_nested
+    schema = {:name => {:first => String, :last => String}}
+    assert_false h(schema, {:name => {:first => "Mike", :last => 1234}})
+  end
 end

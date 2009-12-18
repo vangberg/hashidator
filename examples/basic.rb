@@ -1,12 +1,14 @@
+require 'hashidator'
+
 schema = {
-  :id     => Integer,
+  :id     => Integer,         # Is integer?
   :name   => String,
-  :age    => (13..99),
+  :age    => (13..99),        # Within range?
   :admin  => Boolean,
-  :mails  => [String],
+  :mails  => [String],        # Array consisting of strings?
   :other  => {
-    :language => String,
-    :country  => String
+    :country_code => :to_i,   # Ducktyping!
+    :country      => String
   }
 }
 
@@ -17,8 +19,8 @@ valid_input = {
   :admin  => true,
   :mails  => ["foo@example.com", "bar@example.com"],
   :other  => {
-    :language => "Danish",
-    :country  => "Denmark"
+    :country      => "Denmark",
+    :country_code => 12
   }
 }
 
@@ -29,11 +31,11 @@ invalid_input = {
   :admin  => :maybe,
   :mails  => ["foo@example.com", 1234],
   :other => {
-    :language => true,
-    :country  => [1,2,3]
+    :country      => [1,2,3],
+    :country_code => (1..2)
   }
 }
 
-Hashidator.validate(schema, valid_input) #=> true
+p Hashidator.validate(schema, valid_input) #=> true
 
-Hashidator.validate(schema, invalid_input) #=> false
+p Hashidator.validate(schema, invalid_input) #=> false
