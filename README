@@ -1,0 +1,17 @@
+define schemas as a hash, and validate hashes!
+
+    require 'hashidator'
+
+    schema  = {:name => String, :age => Integer}
+    valid   = {:name => "Harry", :age => 20}
+    invalid = {:name => 1234, :age => "twenty"}
+
+    h = Hashidator.new(schema)
+    h.validate(valid)   #=> true
+    h.validate(invalid) #=> false
+
+see examples/basic.rb for full coverage. it knows
+classes, ranges, booleans and duck typing. yay!
+
+(c) 2009 harry vangberg <harry@vangberg.name>,
+distributed under the mit license. google it.

@@ -36,6 +36,6 @@ invalid_input = {
   }
 }
 
-p Hashidator.validate(schema, valid_input) #=> true
-
-p Hashidator.validate(schema, invalid_input) #=> false
+h = Hashidator.new(schema)
+h.validate(valid_input)     #=> true
+h.validate(invalid_input)   #=> true
