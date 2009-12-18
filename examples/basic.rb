@@ -38,4 +38,4 @@ invalid_input = {
 
 h = Hashidator.new(schema)
 h.validate(valid_input)     #=> true
-h.validate(invalid_input)   #=> true
+h.validate(invalid_input)   #=> false
