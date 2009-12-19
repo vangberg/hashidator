@@ -28,6 +28,8 @@ class Hashidator
       value.all? {|x| validate_value(validator[0], x) }
     when Symbol
       value.respond_to? validator
+    when Regexp
+      value.match validator
     when Hash
       Hashidator.validate(validator, value)
     when Class, Module

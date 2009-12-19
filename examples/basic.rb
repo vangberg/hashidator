@@ -8,8 +8,10 @@ schema = {
   :mails  => [String],        # Array consisting of strings?
   :other  => {
     :country_code => :to_i,   # Ducktyping!
-    :country      => String
-  }
+    :country      => String,
+    :random       => /foo/    # Regular expressions
+  },
+  :validate_array => [{:name => String}]
 }
 
 valid_input = {
@@ -20,8 +22,13 @@ valid_input = {
   :mails  => ["foo@example.com", "bar@example.com"],
   :other  => {
     :country      => "Denmark",
-    :country_code => 12
-  }
+    :country_code => 12,
+    :random       => "foobar"
+  },
+  :validate_array => [
+    {:name => "John"},
+    {:name => "Coltrane"}
+  ]
 }
 
 invalid_input = {
@@ -32,8 +39,13 @@ invalid_input = {
   :mails  => ["foo@example.com", 1234],
   :other => {
     :country      => [1,2,3],
-    :country_code => (1..2)
-  }
+    :country_code => (1..2),
+    :random       => "nothing here"
+  },
+  :validate_array => [
+    {:name => "John"},
+    {:name => 1234}
+  ]
 }
 
 h = Hashidator.new(schema)

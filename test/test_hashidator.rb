@@ -49,6 +49,14 @@ class TestHashidator < Test::Unit::TestCase
     assert_false h({:admin => Boolean}, {:admin => 1234})
   end
 
+  def test_validate_regexp
+    assert_true h({:uri => /^http:/}, {:uri => "http://example.com"})
+  end
+
+  def test_invalidate_regexp
+    assert_false h({:uri => /^http:/}, {:uri => "john coltrane"})
+  end
+
   def test_validate_respond_to
     assert_true h({:name => :to_s}, {:name => "Harry"})
   end
