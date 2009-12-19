@@ -10,7 +10,7 @@ class Hashidator
   end
 
   def validate(input)
-    results = schema.map { |key, validator|
+    results = schema.map {|key, validator|
       validate_value(validator, input[key])
     }
 
@@ -24,7 +24,7 @@ class Hashidator
     when Range
       validator.include? value
     when Array
-      value.all? {|x| validate_value(validator[0], x) }
+      value.all? {|x| validate_value(validator[0], x)}
     when Symbol
       value.respond_to? validator
     when Regexp
