@@ -1,7 +1,6 @@
 class Hashidator
   def self.validate(schema, input)
-    hd = new(schema)
-    hd.validate(input)
+    new(schema).validate(input)
   end
 
   attr_accessor :schema, :errors
