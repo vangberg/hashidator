@@ -1,0 +1,9 @@
+= 0.2 / 2009-12-19
+
+  * Validate regexp:  :foo => /match this/
+
+  * Validate hashes in arrays:  [{:foo => String}]  [Peter Suschlik]
+
+= 0.1 / 2009-12-18
+
+  * Release 0.1
