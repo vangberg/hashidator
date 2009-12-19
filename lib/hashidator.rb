@@ -11,12 +11,8 @@ class Hashidator
   end
 
   def validate(input)
-    results = []
-
-    schema.each { |key, validator|
-      value = input[key]
-      
-      results << validate_value(validator, value)
+    results = schema.map { |key, validator|
+      validate_value(validator, input[key])
     }
 
     results.all?
