@@ -1,7 +1,6 @@
 $:.unshift "lib"
 
 require 'test/unit'
-require 'contest'
 require 'hashidator'
 
 class Test::Unit::TestCase
