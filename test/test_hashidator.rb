@@ -36,6 +36,10 @@ class TestHashidator < Test::Unit::TestCase
     assert_true h({:children => [String]}, {:children => ["Sue", "Mike"]})
   end
 
+  def test_validate_empty_array_members
+    assert_true h({:children => [String]}, {:children => []})
+  end
+
   def test_invalidate_array_members
     assert_false h({:children => [String]}, {:children => ["Sue", 1234]})
   end
