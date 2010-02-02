@@ -3,7 +3,7 @@ class Hashidator
     new(schema).validate(input)
   end
 
-  attr_accessor :schema, :errors
+  attr_accessor :schema
 
   def initialize(schema)
     @schema = schema
