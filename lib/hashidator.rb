@@ -31,6 +31,10 @@ class Hashidator
       Hashidator.validate(validator, value)
     when Class, Module
       value.is_a? validator
+    when Proc
+      result = validator.call(value)
+      result = validate_value(result, value) unless Boolean === result
+      result
     end
   end
 end

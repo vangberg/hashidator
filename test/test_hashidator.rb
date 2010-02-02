@@ -90,6 +90,19 @@ class TestHashidator < Test::Unit::TestCase
     )
   end
 
+  def test_validate_proc_with_boolean_result
+    assert_true h(
+      {:methods => proc {|v| v.all? {|e| e.is_a?(String) || e.is_a?(Symbol) } }},
+      {:methods => ["to_s", :to_h]}
+    )
+  end
+
+  def test_validate_proc_with_cascaded_result
+    schema = {:methods => proc {|v| v.first.is_a?(Integer) ? [Integer] : [String] } }
+    assert_true h(schema, {:methods => [1, 2]})
+    assert_true h(schema, {:methods => ["Harray", "Damone"]})
+  end
+
   def test_validate_nested
     schema = {:name => {:first => String, :last => String}}
     assert_true h(schema, {:name => {:first => "Mike", :last => "Damone"}})

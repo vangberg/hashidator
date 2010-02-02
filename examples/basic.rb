@@ -11,7 +11,8 @@ schema = {
     :country      => String,
     :random       => /foo/    # Regular expressions
   },
-  :validate_array => [{:name => String}]
+  :validate_array => [{:name => String}],
+  :validate_array_size => proc {|v| v.size == 3 }
 }
 
 valid_input = {
@@ -28,7 +29,8 @@ valid_input = {
   :validate_array => [
     {:name => "John"},
     {:name => "Coltrane"}
-  ]
+  ],
+  :validate_array_size => [1,2,3]
 }
 
 invalid_input = {
@@ -45,9 +47,10 @@ invalid_input = {
   :validate_array => [
     {:name => "John"},
     {:name => 1234}
-  ]
+  ],
+  :validate_array_size => [1,2]
 }
 
 h = Hashidator.new(schema)
-h.validate(valid_input)     #=> true
-h.validate(invalid_input)   #=> false
+p h.validate(valid_input)     #=> true
+p h.validate(invalid_input)   #=> false
