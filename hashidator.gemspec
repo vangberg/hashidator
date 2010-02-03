@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name     = "hashidator"
-  s.version  = "0.2"
-  s.date     = "2009-12-19"
+  s.version  = "0.3"
+  s.date     = "2010-02-03"
   s.summary  = "define schemas as a hash, and validate hashes!"
   s.email    = "harry@vangberg.name"
   s.homepage = "http://github.com/ichverstehe/hashidator"
