@@ -1,3 +1,14 @@
+= 0.3 / 2010-02-03
+
+  * Validate with procs. [Peter Suschlik]
+  
+    Proc returns a boolean or another validator.
+    Now you can write custom validators like:
+
+      schema = Hashidator.new(:ary => proc {|v| v.size == 3 })
+      schema.validate(:ary => [1,2,3]) # => true
+      schema.validate(:ary => [1,2])   # => false
+
 = 0.2 / 2009-12-19
 
   * Validate regexp:  :foo => /match this/
