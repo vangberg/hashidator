@@ -11,8 +11,8 @@ schema = {
     :country      => String,
     :random       => /foo/    # Regular expressions
   },
-  :validate_array => [{:name => String}],
-  :validate_array_size => proc {|v| v.size == 3 }
+  :validate_array       => [{:name => String}],
+  :validate_array_size  => proc {|v| v.size == 3 }
 }
 
 valid_input = {
