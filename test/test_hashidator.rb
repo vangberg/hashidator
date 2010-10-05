@@ -44,6 +44,12 @@ class TestHashidator < Test::Unit::TestCase
     assert_false h({:children => [String]}, {:children => ["Sue", 1234]})
   end
 
+  def test_invalidate_array_members_with_non_array_values
+    assert_false h({:ary => [String]}, {:ary => nil})
+    assert_false h({:ary => [String]}, {:ary => :not_an_array})
+    assert_false h({:ary => [String]}, {:ary => {:i_am => "a hash"}})
+  end
+
   def test_validate_boolean
     assert_true h({:admin => Boolean}, {:admin => true})
     assert_true h({:admin => Boolean}, {:admin => true})
