@@ -14,4 +14,6 @@ see examples/basic.rb for full coverage. it knows
 classes, ranges, booleans, proc and duck typing. yay!
 
 (c) 2009 harry vangberg <harry@vangberg.name>,
+         peter suschlik <peter@suschlik.de>
+
 distributed under the mit license. google it.

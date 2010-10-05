@@ -1,3 +1,8 @@
+= 0.3.1 / 2010-10-05
+
+  * Bug fix: Failing on nil as input [Peter Suschlik]
+  * Bug fix: Failing on non-array input to array schema [Peter Suschlik]
+
 = 0.3 / 2010-02-03
 
   * Validate with procs. [Peter Suschlik]
