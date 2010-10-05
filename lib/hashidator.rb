@@ -26,7 +26,7 @@ class Hashidator
     when Symbol
       value.respond_to? validator
     when Regexp
-      value.match validator
+      validator.match value.to_s
     when Hash
       Hashidator.validate(validator, value)
     when Class, Module

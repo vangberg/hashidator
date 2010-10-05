@@ -65,6 +65,8 @@ class TestHashidator < Test::Unit::TestCase
 
   def test_invalidate_regexp
     assert_false h({:uri => /^http:/}, {:uri => "john coltrane"})
+    assert_false h({:uri => /^http:/}, {:uri => nil})
+    assert_false h({:uri => /^http:/}, {:uri => :symbol})
   end
 
   def test_validate_respond_to
