@@ -1,4 +1,4 @@
-require 'test/helper'
+require './test/helper.rb'
 
 class TestHashidator < Test::Unit::TestCase
   def h(schema, input)
