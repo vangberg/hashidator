@@ -23,11 +23,11 @@ class Hashidator
     when Range
       validator.include? value
     when Array
-      value.all? {|x| validate_value(validator[0], x)}
+      value.respond_to?(:all?) && value.all? {|x| validate_value(validator[0], x)}
     when Symbol
       value.respond_to? validator
     when Regexp
-      value.match validator
+      validator.match value.to_s
     when Hash
       Hashidator.validate(validator, value)
     when Class, Module

@@ -1,4 +1,4 @@
-require 'test/helper'
+require './test/helper.rb'
 
 class TestHashidator < Test::Unit::TestCase
   def h(schema, input)
@@ -44,6 +44,12 @@ class TestHashidator < Test::Unit::TestCase
     assert_false h({:children => [String]}, {:children => ["Sue", 1234]})
   end
 
+  def test_invalidate_array_members_with_non_array_values
+    assert_false h({:ary => [String]}, {:ary => nil})
+    assert_false h({:ary => [String]}, {:ary => :not_an_array})
+    assert_false h({:ary => [String]}, {:ary => {:i_am => "a hash"}})
+  end
+
   def test_validate_boolean
     assert_true h({:admin => Boolean}, {:admin => true})
     assert_true h({:admin => Boolean}, {:admin => true})
@@ -59,6 +65,8 @@ class TestHashidator < Test::Unit::TestCase
 
   def test_invalidate_regexp
     assert_false h({:uri => /^http:/}, {:uri => "john coltrane"})
+    assert_false h({:uri => /^http:/}, {:uri => nil})
+    assert_false h({:uri => /^http:/}, {:uri => :symbol})
   end
 
   def test_validate_respond_to
