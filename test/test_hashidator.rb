@@ -139,4 +139,10 @@ class TestHashidator < Test::Unit::TestCase
       {:people => [{ :name => "Ann", :age => 15 }, { :name => "Bob", :age => 23 }]}
     )
   end
+
+  def test_invalidate_for_nil_input
+    schema = {:user => { :name => String }}
+    assert_false h(schema, {})
+    assert_false h(schema, {:user => nil})
+  end
 end
