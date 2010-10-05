@@ -10,6 +10,7 @@ class Hashidator
   end
 
   def validate(input)
+    input ||= {}
     schema.all? {|key, validator|
       validate_value(validator, input[key])
     }
