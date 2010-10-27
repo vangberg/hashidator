@@ -28,6 +28,8 @@ class Hashidator
       value.respond_to? validator
     when Regexp
       validator.match value.to_s
+    when String
+      validator == value
     when Hash
       Hashidator.validate(validator, value)
     when Class, Module
