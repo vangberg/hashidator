@@ -52,7 +52,6 @@ class TestHashidator < Test::Unit::TestCase
 
   def test_validate_boolean
     assert_true h({:admin => Boolean}, {:admin => true})
-    assert_true h({:admin => Boolean}, {:admin => true})
   end
 
   def test_invalidate_boolean
