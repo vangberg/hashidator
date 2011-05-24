@@ -12,6 +12,7 @@ schema = {
     :random       => /foo/    # Regular expressions
   },
   :result => "ok",
+  :bool   => true,
   :validate_array       => [{:name => String}],
   :validate_array_size  => proc {|v| v.size == 3 }
 }
@@ -28,6 +29,7 @@ valid_input = {
     :random       => "foobar"
   },
   :result => "ok",
+  :bool => true,
   :validate_array => [
     {:name => "John"},
     {:name => "Coltrane"}
@@ -47,6 +49,7 @@ invalid_input = {
     :random       => "nothing here"
   },
   :result => "error",
+  :bool => false,
   :validate_array => [
     {:name => "John"},
     {:name => 1234}

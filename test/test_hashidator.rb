@@ -68,13 +68,15 @@ class TestHashidator < Test::Unit::TestCase
     assert_false h({:uri => /^http:/}, {:uri => :symbol})
   end
 
-  def test_validate_specific_string
+  def test_validate_exact_values
     assert_true h({:result => "ok"}, {:result => "ok"})
+    assert_true h({:bool => true}, {:bool => true})
   end
 
-  def test_invalidate_specific_string
+  def test_invalidate_exact_values
     assert_false h({:result => "ok"}, {:result => "error"})
     assert_false h({:result => "ok"}, {:result => nil})
+    assert_false h({:bool => false}, {:bool => true})
   end
 
   def test_validate_respond_to
