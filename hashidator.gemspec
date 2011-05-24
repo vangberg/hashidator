@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.date     = "2010-10-05"
   s.summary  = "define schemas as a hash, and validate hashes!"
   s.email    = "harry@vangberg.name"
-  s.homepage = "http://github.com/ichverstehe/hashidator"
+  s.homepage = "https://github.com/vangberg/hashidator"
   s.description = "define schemas as a hash, and validate hashes!"
   s.has_rdoc = false
   s.authors  = ["Harry Vangberg", "Peter Suschlik"]
