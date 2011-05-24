@@ -29,7 +29,7 @@ class Hashidator
     when Regexp
       validator.match value.to_s
     when Hash
-      Hashidator.validate(validator, value)
+      self.class.validate(validator, value)
     when Class, Module
       value.is_a? validator
     when Proc
