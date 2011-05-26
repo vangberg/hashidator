@@ -20,24 +20,17 @@ class Hashidator
 
   def validate_value(validator, value)
     case validator
-    when Range
-      validator.include? value
     when Array
       value.respond_to?(:all?) && value.all? {|x| validate_value(validator[0], x)}
     when Symbol
       value.respond_to? validator
-    when Regexp
-      validator.match value.to_s
     when Hash
       self.class.validate(validator, value)
-    when Class, Module
-      value.is_a? validator
-    when Proc
-      result = validator.call(value)
+    else
+      result = validator == value
+      result = validator === value unless result
       result = validate_value(result, value) unless Boolean === result
       result
-    else
-      validator == value
     end
   end
 end
@@ -51,4 +44,8 @@ end
 
 class FalseClass
   include Boolean
+end
+
+class Proc
+  alias :=== :call if RUBY_VERSION < "1.9"
 end
