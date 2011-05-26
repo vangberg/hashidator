@@ -134,6 +134,25 @@ class TestHashidator < Test::Unit::TestCase
     assert_false h(schema, {:methods => ["Harry", 2]})
   end
 
+  def test_validation_with_equality
+    optional = Class.new do
+      def initialize(schema)
+        @schema = schema
+      end
+
+      def ===(other)
+        other.nil? || @schema
+      end
+    end
+
+    schema = {:phone => optional.new(String)}
+    assert_true h(schema, {:phone => "+49 2305 4711"})
+    assert_true h(schema, {:phone => nil})
+    assert_true h(schema, {})
+    assert_false h(schema, {:phone => false})
+    assert_false h(schema, {:phone => 1234567})
+  end
+
   def test_validate_nested
     schema = {:name => {:first => String, :last => String}}
     assert_true h(schema, {:name => {:first => "Mike", :last => "Damone"}})

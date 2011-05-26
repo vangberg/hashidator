@@ -1,5 +1,15 @@
 require 'hashidator'
 
+class OptionalValue
+  def initialize(schema)
+    @schema = schema
+  end
+
+  def ===(value)
+    value.nil? || @schema
+  end
+end
+
 schema = {
   :id     => Integer,         # Is integer?
   :name   => String,
@@ -13,6 +23,7 @@ schema = {
   },
   :result => "ok",
   :bool   => true,
+  :hotchicks => OptionalValue.new([{ :name => String, :age => (18..30) }]),
   :validate_array       => [{:name => String}],
   :validate_array_size  => proc {|v| v.size == 3 }
 }
@@ -30,6 +41,10 @@ valid_input = {
   },
   :result => "ok",
   :bool => true,
+  :hotchicks => [
+    { :name => "Nura",  :age => 26 },
+    { :name => "Sarah", :age => 30 }
+  ],
   :validate_array => [
     {:name => "John"},
     {:name => "Coltrane"}
@@ -50,6 +65,9 @@ invalid_input = {
   },
   :result => "error",
   :bool => false,
+  :hotchicks => [
+    { :name => "Uma", :age => 42 }
+  ],
   :validate_array => [
     {:name => "John"},
     {:name => 1234}
@@ -59,4 +77,5 @@ invalid_input = {
 
 h = Hashidator.new(schema)
 p h.validate(valid_input)     #=> true
+p "=" * 80
 p h.validate(invalid_input)   #=> false
