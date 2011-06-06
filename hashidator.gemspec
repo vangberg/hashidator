@@ -1,7 +1,9 @@
+$:.push File.expand_path("../lib", __FILE__)
+require 'hashidator/version'
+
 Gem::Specification.new do |s|
   s.name     = "hashidator"
-  s.version  = "0.3.1"
-  s.date     = "2010-10-05"
+  s.version  = Hashidator::VERSION
   s.summary  = "define schemas as a hash, and validate hashes!"
   s.email    = "harry@vangberg.name"
   s.homepage = "https://github.com/vangberg/hashidator"
@@ -12,7 +14,8 @@ Gem::Specification.new do |s|
     "README", 
     "TODO",
 		"hashidator.gemspec", 
-		"lib/hashidator.rb"
+		"lib/hashidator.rb",
+		"lib/hashidator/version.rb"
   ]
   s.test_files  = [
     "test/helper.rb",

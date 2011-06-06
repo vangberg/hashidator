@@ -1,4 +1,6 @@
 class Hashidator
+  autoload :VERSION, 'hashidator/version'
+
   def self.validate(schema, input)
     new(schema).validate(input)
   end
