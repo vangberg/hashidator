@@ -179,8 +179,8 @@ class TestHashidator < Test::Unit::TestCase
 
   def test_deep_nested_validation_uses_subclass
     h = Class.new(Hashidator) do
-      def validate_value(validator, value)
-        throw :halt, "HAMMERZEIT" if value == 'STOP'
+      def validate(input)
+        throw :halt, "#{input[:value]} HAMMERZEIT" if input[:value] == 'STOP'
         super
       end
     end
@@ -190,7 +190,7 @@ class TestHashidator < Test::Unit::TestCase
         {:deep => { :value => String}},
         {:deep => { :value => 'STOP'}})
     end
-    assert_equal "HAMMERZEIT", caught
+    assert_equal "STOP HAMMERZEIT", caught
   end
 
   def test_invalidate_for_nil_input
