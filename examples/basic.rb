@@ -76,6 +76,6 @@ invalid_input = {
 }
 
 h = Hashidator.new(schema)
-p h.validate(valid_input)     #=> true
-p "=" * 80
-p h.validate(invalid_input)   #=> false
+puts h.validate(valid_input)     #=> true
+puts "=" * 80
+puts h.validate(invalid_input)   #=> false
