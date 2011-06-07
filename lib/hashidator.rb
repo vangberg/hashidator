@@ -24,10 +24,10 @@ class Hashidator
     case validator
     when Array
       value.respond_to?(:all?) && value.all? {|x| validate_value(validator[0], x)}
+    when Hash
+      value.respond_to?(:[]) && validator.all? {|k, v| validate_value(v, value[k]) }
     when Symbol
       value.respond_to? validator
-    when Hash
-      self.class.validate(validator, value)
     else
       result = validator == value
       result = validator === value unless result
