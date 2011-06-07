@@ -1,3 +1,28 @@
+= 0.4.0 / 2011-06-07
+
+  * Better support for subclassing Hashidator. [Peter Suschlik]
+
+  * Custom validator classes need to implement #===. [Peter Suschlik]
+
+    Optional value example:
+
+      class OpionalValue
+        def initialize(schema)
+          @schema = schema
+        end
+
+        def ===(value)
+          value.nil? || @schema
+        end
+      end
+
+      schema = Hashidator.new(:name => String, :hobby => OpionalValue.new(String))
+      schema.validate(:name => "Bob", :hobby => "Cipher") # => true
+      schema.validate(:name => "Bob")                     # => true, even without a hobby
+      schema.validate(:name => "Bob", :hobby => 23)       # => falseo
+
+  * Add string validator [Peter Suschlik]
+
 = 0.3.1 / 2010-10-05
 
   * Bug fix: Failing on nil as input [Peter Suschlik]
