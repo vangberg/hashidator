@@ -1,9 +1,7 @@
-$:.unshift "lib"
-
-require 'test/unit'
+require 'minitest/autorun'
 require 'hashidator'
 
-class Test::Unit::TestCase
+class Minitest::Test
   def assert_true(subject)
     assert_equal true, subject
   end

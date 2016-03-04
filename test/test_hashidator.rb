@@ -1,6 +1,6 @@
-require './test/helper.rb'
+require 'helper'
 
-class TestHashidator < Test::Unit::TestCase
+class TestHashidator < Minitest::Test
   def h(schema, input)
     Hashidator.validate(schema, input)
   end

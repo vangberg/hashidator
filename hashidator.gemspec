@@ -10,15 +10,12 @@ Gem::Specification.new do |s|
   s.description = "define schemas as a hash, and validate hashes!"
   s.has_rdoc = false
   s.authors  = ["Harry Vangberg", "Peter Suschlik"]
-  s.files    = [
-    "README", 
-    "TODO",
-		"hashidator.gemspec", 
-		"lib/hashidator.rb",
-		"lib/hashidator/version.rb"
-  ]
-  s.test_files  = [
-    "test/helper.rb",
-    "test/test_hashidator.rb"
-  ]
+
+  s.files         = `git ls-files`.split("\n")
+  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.require_paths = ["lib"]
+
+  s.add_development_dependency 'rake', '~> 10.5.0'
+  s.add_development_dependency 'minitest', '~> 5.8.4'
 end
