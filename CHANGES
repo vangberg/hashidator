@@ -1,4 +1,10 @@
+= 0.4.1 / 2016-03-07
+
+  * Modernize project (bundler, minitest). [Peter Suschlik]
+
 = 0.4.0 / 2011-06-07
+
+  * Note: This was pushed to rubygems on 2016-03-07
 
   * Better support for subclassing Hashidator. [Peter Suschlik]
 
