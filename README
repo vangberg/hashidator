@@ -13,6 +13,12 @@ define schemas as a hash, and validate hashes!
 see examples/basic.rb for full coverage. it knows
 classes, ranges, booleans, proc and duck typing. yay!
 
+to release this gem:
+ * edit lib/hashidator/version.rb
+ * edit CHANGES
+ * git commit -am "Release VERSION"
+ * rake release
+
 (c) 2009 harry vangberg <harry@vangberg.name>,
          peter suschlik <peter@suschlik.de>
 
